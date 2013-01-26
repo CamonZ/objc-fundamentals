@@ -25,29 +25,30 @@ RentalProperty properties[] = {
 
 @implementation RentalManagerMasterViewController
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib{
     [super awakeFromNib];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+- (void)viewDidLoad{
+  [super viewDidLoad];
+  
+  NSString *path = [[NSBundle mainBundle]
+                    pathForResource:@"CityMappings" ofType:@"plist"];
+  cityMappings = [[NSDictionary alloc] initWithContentsOfFile:path];
+  
 	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+  self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+  UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+  self.navigationItem.rightBarButtonItem = addButton;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)didReceiveMemoryWarning{
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
 }
 
-- (void)insertNewObject:(id)sender
-{
+- (void)insertNewObject:(id)sender{
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
     NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
@@ -86,10 +87,18 @@ RentalProperty properties[] = {
       initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
   }
   
-  cell.textLabel.text = properties[indexPath.row].address;
+  RentalProperty *details = &properties[indexPath.row];
+  
+  int indexofComma = [details->address rangeOfString:@","].location;
+  NSString *address = [details->address substringToIndex:indexofComma];
+  NSString *city = [details->address substringFromIndex:indexofComma + 2];
+  
+  cell.textLabel.text = address;
+  
+  cell.imageView.image = [UIImage imageNamed:[cityMappings objectForKey:city]];
+  
   cell.detailTextLabel.text =
-    [NSString stringWithFormat:@"Rents for $%0.2f per week",
-     properties[indexPath.row].weeklyRentalPrice];
+    [NSString stringWithFormat:@"Rents for $%0.2f per week", details->weeklyRentalPrice];
   
   return cell;
 }
@@ -133,8 +142,7 @@ RentalProperty properties[] = {
 
 #pragma mark - Fetched results controller
 
-- (NSFetchedResultsController *)fetchedResultsController
-{
+- (NSFetchedResultsController *)fetchedResultsController{
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }
@@ -170,29 +178,26 @@ RentalProperty properties[] = {
     return _fetchedResultsController;
 }    
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller{
     [self.tableView beginUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
-           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
-{
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-    }
+  atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type{
+  switch(type) {
+    case NSFetchedResultsChangeInsert:
+      [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+      break;
+        
+    case NSFetchedResultsChangeDelete:
+      [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+      break;
+  }
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath
-{
+  atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+  newIndexPath:(NSIndexPath *)newIndexPath{
     UITableView *tableView = self.tableView;
     
     switch(type) {

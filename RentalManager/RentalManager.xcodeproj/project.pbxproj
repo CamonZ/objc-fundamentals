@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D7C7502716B067810016FA9D /* city.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D7C7502416B067810016FA9D /* city.jpg */; };
+		D7C7502816B067810016FA9D /* mountain.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D7C7502516B067810016FA9D /* mountain.jpg */; };
+		D7C7502916B067810016FA9D /* sea.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D7C7502616B067810016FA9D /* sea.jpg */; };
 		D7DCAC7D16ACB2C10030F9AB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7DCAC7C16ACB2C10030F9AB /* UIKit.framework */; };
 		D7DCAC7F16ACB2C10030F9AB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7DCAC7E16ACB2C10030F9AB /* Foundation.framework */; };
 		D7DCAC8116ACB2C10030F9AB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7DCAC8016ACB2C10030F9AB /* CoreGraphics.framework */; };
@@ -21,9 +24,13 @@
 		D7DCAC9B16ACB2C10030F9AB /* RentalManager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D7DCAC9916ACB2C10030F9AB /* RentalManager.xcdatamodeld */; };
 		D7DCAC9E16ACB2C10030F9AB /* RentalManagerMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DCAC9D16ACB2C10030F9AB /* RentalManagerMasterViewController.m */; };
 		D7DCACA116ACB2C10030F9AB /* RentalManagerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DCACA016ACB2C10030F9AB /* RentalManagerDetailViewController.m */; };
+		D7E62AB316B2F0E600856ED4 /* CityMappings.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7E62AB216B2F0E600856ED4 /* CityMappings.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D7C7502416B067810016FA9D /* city.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = city.jpg; sourceTree = "<group>"; };
+		D7C7502516B067810016FA9D /* mountain.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mountain.jpg; sourceTree = "<group>"; };
+		D7C7502616B067810016FA9D /* sea.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sea.jpg; sourceTree = "<group>"; };
 		D7DCAC7816ACB2C10030F9AB /* RentalManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RentalManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7DCAC7C16ACB2C10030F9AB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D7DCAC7E16ACB2C10030F9AB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -44,6 +51,7 @@
 		D7DCAC9D16ACB2C10030F9AB /* RentalManagerMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RentalManagerMasterViewController.m; sourceTree = "<group>"; };
 		D7DCAC9F16ACB2C10030F9AB /* RentalManagerDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RentalManagerDetailViewController.h; sourceTree = "<group>"; };
 		D7DCACA016ACB2C10030F9AB /* RentalManagerDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RentalManagerDetailViewController.m; sourceTree = "<group>"; };
+		D7E62AB216B2F0E600856ED4 /* CityMappings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CityMappings.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +120,10 @@
 		D7DCAC8516ACB2C10030F9AB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D7E62AB216B2F0E600856ED4 /* CityMappings.plist */,
+				D7C7502416B067810016FA9D /* city.jpg */,
+				D7C7502516B067810016FA9D /* mountain.jpg */,
+				D7C7502616B067810016FA9D /* sea.jpg */,
 				D7DCAC8616ACB2C10030F9AB /* RentalManager-Info.plist */,
 				D7DCAC8716ACB2C10030F9AB /* InfoPlist.strings */,
 				D7DCAC8A16ACB2C10030F9AB /* main.m */,
@@ -180,6 +192,10 @@
 				D7DCAC9316ACB2C10030F9AB /* Default@2x.png in Resources */,
 				D7DCAC9516ACB2C10030F9AB /* Default-568h@2x.png in Resources */,
 				D7DCAC9816ACB2C10030F9AB /* MainStoryboard.storyboard in Resources */,
+				D7C7502716B067810016FA9D /* city.jpg in Resources */,
+				D7C7502816B067810016FA9D /* mountain.jpg in Resources */,
+				D7C7502916B067810016FA9D /* sea.jpg in Resources */,
+				D7E62AB316B2F0E600856ED4 /* CityMappings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +327,7 @@
 				D7DCACA616ACB2C10030F9AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

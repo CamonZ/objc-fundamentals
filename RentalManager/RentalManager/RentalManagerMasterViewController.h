@@ -10,7 +10,9 @@
 
 #import <CoreData/CoreData.h>
 
-@interface RentalManagerMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface RentalManagerMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>{
+  NSDictionary *cityMappings;
+}
 
 typedef enum PropertyType{
   Unit,
