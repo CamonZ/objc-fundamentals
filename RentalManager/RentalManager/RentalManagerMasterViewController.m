@@ -8,22 +8,15 @@
 
 #import "RentalManagerMasterViewController.h"
 #import "RentalManagerDetailViewController.h"
-
-#define ARRAY_SIZE(x) (sizeof(x) / sizeof(x[0]))
-
-RentalProperty properties[] = {
-  { @"13 Waverly Crescent, Sumner", TownHouse, 420.0f },
-  { @"74 Roberson Lane, Christchurch", Unit, 365.0f },
-  { @"17 Kipling Street, Riccarton", Unit, 275.9f },
-  { @"4 Everglade Ridge, Sumner", Mansion, 1500.0f },
-  { @"19 Islington Road, Clifton", Mansion, 2000.0f }
-};
+#import "CTRentalProperty.h"
 
 @interface RentalManagerMasterViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
 
 @implementation RentalManagerMasterViewController
+
+@synthesize properties = _properties;
 
 - (void)awakeFromNib{
     [super awakeFromNib];
@@ -34,71 +27,53 @@ RentalProperty properties[] = {
   
   NSString *path = [[NSBundle mainBundle]
                     pathForResource:@"CityMappings" ofType:@"plist"];
-  cityMappings = [[NSDictionary alloc] initWithContentsOfFile:path];
   
-	// Do any additional setup after loading the view, typically from a nib.
-  self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-  UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-  self.navigationItem.rightBarButtonItem = addButton;
+  _cityMappings = [[NSDictionary alloc] initWithContentsOfFile:path];
+  
+  self.properties = [[NSArray alloc] initWithObjects:
+                 [CTRentalProperty
+                  rentalPropertyOfType:TownHouse rentingFor:420.0f atAddress:@"13 Waverly Crescent, Sumner"],
+                 [CTRentalProperty
+                  rentalPropertyOfType:Unit rentingFor:365.0f atAddress:@"74 Roberson Lane, Christchurch"],
+                 [CTRentalProperty
+                  rentalPropertyOfType:Unit rentingFor:275.9f atAddress:@"17 Kipling Street, Riccarton"],
+                 [CTRentalProperty
+                  rentalPropertyOfType:Mansion rentingFor:1500.0f atAddress:@"4 Everglade Ridge, Sumner"],
+                 [CTRentalProperty
+                  rentalPropertyOfType:Mansion rentingFor:2000.0f atAddress:@"19 Islington Road, Clifton"],
+                 nil];
 }
 
-- (void)didReceiveMemoryWarning{
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
-}
 
-- (void)insertNewObject:(id)sender{
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
-    NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-    
-    // If appropriate, configure the new managed object.
-    // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-    [newManagedObject setValue:[NSDate date] forKey:@"timeStamp"];
-    
-    // Save the context.
-    NSError *error = nil;
-    if (![context save:&error]) {
-         // Replace this implementation with code to handle the error appropriately.
-         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-}
-
-#pragma mark - Table View
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return [[self.fetchedResultsController sections] count];
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-  return ARRAY_SIZE(properties);
+  return [self.properties count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-  static NSString * CellIdentifier = @"Cell";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  
+  static NSString * cellIdentifier = @"Cell";
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  
   
   if(cell == nil){
     cell = [[UITableViewCell alloc]
-      initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+      initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
   }
   
-  RentalProperty *details = &properties[indexPath.row];
   
-  int indexofComma = [details->address rangeOfString:@","].location;
-  NSString *address = [details->address substringToIndex:indexofComma];
-  NSString *city = [details->address substringFromIndex:indexofComma + 2];
+  CTRentalProperty *property = [self.properties objectAtIndex:indexPath.row];
+  
+  int indexofComma = [property.address rangeOfString:@","].location;
+  NSString *address = [property.address substringToIndex:indexofComma];
+  NSString *city = [property.address substringFromIndex:indexofComma + 2];
   
   cell.textLabel.text = address;
   
-  cell.imageView.image = [UIImage imageNamed:[cityMappings objectForKey:city]];
+  cell.imageView.image = [UIImage imageNamed:[_cityMappings objectForKey:city]];
   
   cell.detailTextLabel.text =
-    [NSString stringWithFormat:@"Rents for $%0.2f per week", details->weeklyRentalPrice];
+    [NSString stringWithFormat:@"Rents for $%0.2f per week", property.rentalPrice];
   
   return cell;
 }

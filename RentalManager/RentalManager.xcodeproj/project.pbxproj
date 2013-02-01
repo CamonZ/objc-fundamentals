@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D736222D16BAEEC800081A09 /* CTRentalProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = D736222C16BAEEC800081A09 /* CTRentalProperty.m */; };
 		D7C7502716B067810016FA9D /* city.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D7C7502416B067810016FA9D /* city.jpg */; };
 		D7C7502816B067810016FA9D /* mountain.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D7C7502516B067810016FA9D /* mountain.jpg */; };
 		D7C7502916B067810016FA9D /* sea.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D7C7502616B067810016FA9D /* sea.jpg */; };
@@ -28,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D736222B16BAEEC800081A09 /* CTRentalProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTRentalProperty.h; sourceTree = "<group>"; };
+		D736222C16BAEEC800081A09 /* CTRentalProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTRentalProperty.m; sourceTree = "<group>"; };
 		D7C7502416B067810016FA9D /* city.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = city.jpg; sourceTree = "<group>"; };
 		D7C7502516B067810016FA9D /* mountain.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mountain.jpg; sourceTree = "<group>"; };
 		D7C7502616B067810016FA9D /* sea.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sea.jpg; sourceTree = "<group>"; };
@@ -104,6 +107,8 @@
 		D7DCAC8416ACB2C10030F9AB /* RentalManager */ = {
 			isa = PBXGroup;
 			children = (
+				D736222B16BAEEC800081A09 /* CTRentalProperty.h */,
+				D736222C16BAEEC800081A09 /* CTRentalProperty.m */,
 				D7DCAC8D16ACB2C10030F9AB /* RentalManagerAppDelegate.h */,
 				D7DCAC8E16ACB2C10030F9AB /* RentalManagerAppDelegate.m */,
 				D7DCAC9616ACB2C10030F9AB /* MainStoryboard.storyboard */,
@@ -211,6 +216,7 @@
 				D7DCAC9B16ACB2C10030F9AB /* RentalManager.xcdatamodeld in Sources */,
 				D7DCAC9E16ACB2C10030F9AB /* RentalManagerMasterViewController.m in Sources */,
 				D7DCACA116ACB2C10030F9AB /* RentalManagerDetailViewController.m in Sources */,
+				D736222D16BAEEC800081A09 /* CTRentalProperty.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

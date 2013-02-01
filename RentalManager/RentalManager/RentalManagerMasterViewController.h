@@ -11,23 +11,12 @@
 #import <CoreData/CoreData.h>
 
 @interface RentalManagerMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>{
-  NSDictionary *cityMappings;
+  NSDictionary *_cityMappings;
+  NSArray *_properties;
 }
-
-typedef enum PropertyType{
-  Unit,
-  TownHouse,
-  Mansion
-} PropertyType;
-
-typedef struct {
-  __unsafe_unretained NSString *address;
-  PropertyType type;
-  double weeklyRentalPrice;
-} RentalProperty;
 
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-
+@property (nonatomic, strong) NSArray *properties;
 @end
